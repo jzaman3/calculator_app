@@ -80,3 +80,58 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     });
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Calculator App'),
+      ),
+      body: Column(
+        children: [
+          Expanded( //results box
+            child: Container(
+              alignment: Alignment.bottomCenter,
+              child: Text(
+                starting_zero,
+                style: TextStyle(fontSize: 56),
+              ),
+            ),
+          ),
+          Expanded(
+
+            child: Column(
+              children: [ //display calculator
+                _buildButtonRow(["7", "8", "9", "/"]),
+                _buildButtonRow(["4", "5", "6", "*"]),
+                _buildButtonRow(["1", "2", "3", "-"]),
+                _buildButtonRow(["C", "0", "=", "+"]),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildButtonRow(List<String> buttons) {
+    return Expanded(
+      child: Row( //building each row of buttons
+
+        children: buttons.map((button) {
+          return Expanded(
+            child: Container(
+
+              child: ElevatedButton(//default buttons
+                onPressed: () => _onButtonPressed(button),
+                child: Text(
+                  button,
+                  style: TextStyle(fontSize: 36), //size of numbers in buttons
+                ),
+              ),
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+}
